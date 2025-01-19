@@ -2,6 +2,8 @@
 
 SESSION=$1
 PROJECT_DIRECTORY=$1
+SCRIPT_PATH=$(readlink -f "${BASH_SOURCE[0]}")
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
 tmux has-session -t "devilbox" 2>/dev/null
 
@@ -24,8 +26,8 @@ if [ $? != 0 ]; then
     tmux send-keys -t "$SESSION":"$PROJECT_DIRECTORY".0 "nvim ." C-m 
 
     #Hooks:
-    tmux set-hook -t "$SESSION" client-attached "run-shell ~/start-process.sh $SESSION"
-    tmux set-hook -t "$SESSION" client-detached "run-shell ~/stop-process.sh $SESSION"
+    tmux set-hook -t "$SESSION" client-attached "run-shell $SCRIPT_DIR/start-process.sh $SESSION"
+    tmux set-hook -t "$SESSION" client-detached "run-shell $SCRIPT_DIR/stop-process.sh $SESSION"
 fi
 
 tmux attach-session -t "$SESSION"
