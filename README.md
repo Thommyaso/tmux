@@ -9,6 +9,8 @@ Devilbox is run in separate session, in the background. The session is called: d
 
 ## Symlink 'work' script to '/usr/local/bin/' to make work script awailable globally for the user
 
-then run command work and the repository you want to open ( script is set up to look for projects inside ~/devilbox/data/www/).
-There is an auto-complete configured, for any directory available in the folder: '~/devilbox/data/www/', just press <tab> as you type.
+then run command work and the repository you want to open ( script is set up to look for projects inside ``` ~/devilbox/data/www/ ``` ).
+There is an auto-complete configured, for any directory available in the folder: '~/devilbox/data/www/', just press ``` <tab> ``` as you type.
 This command only look for projects inside specyfied folder! directories outside are not available, you will have to start tmux manually in that case.
+
+## For auto-complete to work it needs to be sourced run: ``` source ~/.bash_completion.sh ``` from projects directory
