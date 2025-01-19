@@ -12,5 +12,5 @@ Devilbox is run in separate session, in the background. The session is called: d
 ## Configuration:
 
 1. Symlink 'work' script to '/usr/local/bin/' to make work script awailable globally for the user
-
-2. Run: ``` source .bash_completion.sh ``` from projects directory, to enable auto-complete for repositories when using ``` work ``` command.
+2. Open bashrc config using ```nvim  ~/.bashrc ``` and add ``` source /path/to/the/repository/.bash_completion.sh ``` to make auto-complete permanently available for the ``` work ``` command.
+3. Run ``` source ~/.bashrc ``` to apply changes
