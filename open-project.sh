@@ -2,6 +2,7 @@
 
 SESSION=$1
 PROJECT_DIRECTORY=$1
+CUSTOM_CONFIG=$2
 SCRIPT_PATH=$(readlink -f "${BASH_SOURCE[0]}")
 SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
@@ -11,6 +12,10 @@ if [ $? != 0 ]; then
     #If devilbox isn't running sart it in a background session
     tmux new-session -ds "devilbox" -n "terminal" -c ~/devilbox
     tmux send-keys -t 'devilbox':'terminal'.0 "./up.sh" C-m
+fi
+
+if [ -n "$CUSTOM_CONFIG" ]; then
+    SESSION="$SESSION-$CUSTOM_CONFIG"
 fi
 
 tmux has-session -t "$SESSION" 2>/dev/null
@@ -28,6 +33,10 @@ if [ $? != 0 ]; then
     #Hooks:
     tmux set-hook -t "$SESSION" client-attached "run-shell $SCRIPT_DIR/start-process.sh $SESSION"
     tmux set-hook -t "$SESSION" client-detached "run-shell $SCRIPT_DIR/stop-process.sh $SESSION"
+
+    if [ -n "$CUSTOM_CONFIG" ]; then
+        "$SCRIPT_DIR/custom_settings/$PROJECT_DIRECTORY/$CUSTOM_CONFIG" $SESSION
+    fi
 fi
 
 tmux attach-session -t "$SESSION"

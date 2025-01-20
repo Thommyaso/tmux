@@ -8,12 +8,13 @@ if [ -z "$1" ]; then
 fi
 
 PROJECT_NAME="$1"
+CUSTOM_CONFIG="$2"
 FULL_PATH="$PROJECTS_DIR/$PROJECT_NAME"
 SCRIPT_PATH=$(readlink -f "${BASH_SOURCE[0]}")
 SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
 if [ -d "$FULL_PATH" ]; then
-    $SCRIPT_DIR/open-project.sh $PROJECT_NAME
+    $SCRIPT_DIR/open-project.sh $PROJECT_NAME $CUSTOM_CONFIG
 else
     echo "Project folder '$PROJECT_NAME' does not exist in $PROJECTS_DIR."
     exit 1

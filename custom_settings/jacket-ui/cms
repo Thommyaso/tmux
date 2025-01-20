@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SESSION=$1
+
+tmux split-window -t "$SESSION":"terminal".0 -h -c ~/devilbox/data/www/scanstrut-web
+tmux send-keys -t "$SESSION":"terminal".1 "npm run dev" C-m
+
+tmux new-window -t "$SESSION" -n "jacket-cms" -c ~/devilbox/data/www/jacket-cms
+tmux send-keys -t "$SESSION":"jacket-cms" "nvim ." C-m
+
+tmux new-window -t "$SESSION" -n "scanstrut" -c ~/devilbox/data/www/scanstrut-web
+tmux send-keys -t "$SESSION":"scanstrut" "nvim ." C-m
