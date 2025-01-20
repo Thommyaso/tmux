@@ -6,6 +6,7 @@ CUSTOM_CONFIG=$2
 SCRIPT_PATH=$(readlink -f "${BASH_SOURCE[0]}")
 SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
+## Devilbox setup, can be switched to other Docker configuration or compleatly removed:
 tmux has-session -t "devilbox" 2>/dev/null
 
 if [ $? != 0 ]; then
@@ -13,12 +14,13 @@ if [ $? != 0 ]; then
     tmux new-session -ds "devilbox" -n "terminal" -c ~/devilbox
     tmux send-keys -t 'devilbox':'terminal'.0 "./up.sh" C-m
 fi
+##
 
 if [ -n "$CUSTOM_CONFIG" ]; then
     SESSION="$SESSION-$CUSTOM_CONFIG"
 fi
 
-tmux has-session -t "$SESSION" 2>/dev/null
+tmux has-session -t "^${SESSION}$" 2>/dev/null
 
 if [ $? != 0 ]; then
     #Start session and 'run npm run dev' 
