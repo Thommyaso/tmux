@@ -1,29 +1,48 @@
-# This is the configuration for tmux, to automatically run any repository from devilbox, with devilbox docker running as a background session and selected project opened together with file watcher already running in the background and nvim opend and focused
+# Tmux Configuration for Devilbox Projects
 
-This configuration is set up to use window 0 for  any terminal pnes that are ment to be run, upon detachting from this session,
-every process from that window gets stopped by tmux (it runs Control + c on every pane). Upon re-attaching to the session,
-each pane from that window gets it original command re-run (for example if 'npm run dev' was used in that pane,
-that command will be fired for that pane on session attach).
+## This tmux configuration allows you to seamlessly run any repository from chosen directory. By default it is setup for projects inside Devilbox, but it can be adjusted if needed. 
+## It integrates Docker session running in the background with a selected project environment, a file watcher, and an opened and focused Neovim editor.
 
-Devilbox is run in separate session, in the background. The session is called: devilbox.
+### Key Features:
+- Utilizes tmux window 0 for all terminal processes. When detached, all running processes in this window are automatically stopped by tmux (Ctrl+C is sent to every pane).
+- Upon reattaching to the session, each pane resumes its original command. For example, if npm run dev was running in a pane, it will automatically restart upon reattaching.
+- Devilbox runs in a separate background session named devilbox. (This can be configured to run any other Docker setup, or be compleatly disabled)
+- Includes auto-complete functionality for project selection, scanning repositories in ~/devilbox/data/www/. Only repositories from this directory are available for use.
 
-### There is an auto-complete configured, just press ``` <tab> ``` as you type ( script is set up to look for projects inside ``` ~/devilbox/data/www/ ```, and only repositories from that folder are available ).
+### Configuration Steps:
+1. Create a Symlink
+    - Link the work script to /usr/local/bin/ to make it globally accessible:
+        ``` sudo ln -s /path/to/work /usr/local/bin/work ```
 
-## Configuration:
+2. Update .bashrc
+    - Add the following line to your .bashrc file using Neovim or any other editor:
+        ``` source /path/to/the/repository/.bash_completion.sh ```
+    This enables auto-completion for the work command.
 
-1. Symlink 'work' script to '/usr/local/bin/' to make work script awailable globally for the user
-2. Open bashrc config using ```nvim  ~/.bashrc ``` and add ``` source /path/to/the/repository/.bash_completion.sh ``` to make auto-complete permanently available for the ``` work ``` command.
-3. Run ``` source ~/.bashrc ``` to apply changes
+3. Apply Changes
+    - Reload the .bashrc configuration:
+        ``` source ~/.bashrc ```
 
 
-## You can setup custom scripts for your projects if there is additionall configuration you want to run alongside your project:
-To set this up, you need to place your scripts inside ``` custom_settings/<project-directory-name>/<custom-script> ```, example:
+## Setting Up Custom Scripts for Projects
+    
+You can define custom scripts for specific projects to run alongside their configurations. This is particularly useful for additional commands or settings unique to a project.
 
-    If you have a project called snake_game, and for that specyfic project you need additional windows/panes opened etc.
-    Create a directory inside ``` custom_settings ``` name it ``` snake_game ```, then inside freshly created directory you can
-    set custom scripts, defining any additional configuration you need. Then you run:
+### How to Configure:
+1. Place your custom scripts in:
+    ``` custom_settings/<project-directory-name>/<custom-script> ```
+    - Example:
+        If your project is named snake_game, and it requires additional configurations:
 
-        work snake_game <custom-script-name>
+        Create a directory:
+            ``` custom_settings/snake_game/ ```
+        Add your script inside this directory.
 
-This command will run selected project with chosen custom confuguration. Auto-complete also works for custom scripts, press ``` <tab> ```
-to use it -- it automatically searches for scripts stored in directory inside custom_script referening that specyfic project.
+2. Run the work command with the custom script:
+    ``` work snake_game <custom-script-name> ```
+
+### The command automatically detects and runs the selected project with the specified custom script. Auto-complete is also supported for both project directories and custom scripts.
+
+### You may need to run command ```sudo chmod +x <script-name> ``` to make scripts executable.
+
+
