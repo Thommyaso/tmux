@@ -20,9 +20,9 @@ if [ -n "$CUSTOM_CONFIG" ]; then
     SESSION="$SESSION-$CUSTOM_CONFIG"
 fi
 
-tmux has-session -t "^${SESSION}$" 2>/dev/null
+tmux has-session -t "=${SESSION}" 2>/dev/null
 
-if [ $? != 0 ]; then
+if [ $? -ne 0 ]; then
     #Start session and 'run npm run dev' 
     tmux new-session -ds "$SESSION" -n "terminal" -c ~/devilbox/data/www
     tmux send-keys -t "$SESSION":'terminal'.0 "cd ./$PROJECT_DIRECTORY" C-m
