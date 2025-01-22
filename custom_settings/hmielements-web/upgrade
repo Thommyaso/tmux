@@ -1,15 +1,17 @@
 #!/bin/bash
 
+source ./variables.sh
+
 SESSION=$1
 
-tmux new-window -t "$SESSION" -n "jacket-cms" -c ~/devilbox/data/www/jacket-cms
+tmux new-window -t "$SESSION" -n "jacket-cms" -c $REPO_DIR/jacket-cms
 tmux send-keys -t "$SESSION":"jacket-cms" "nvim ." C-m
 
-tmux new-window -t "$SESSION" -n "jacket" -c ~/devilbox/data/www/jacket
+tmux new-window -t "$SESSION" -n "jacket" -c $REPO_DIR/jacket
 tmux send-keys -t "$SESSION":"jacket" "nvim ." C-m
 
-tmux new-window -t "$SESSION" -n "scanstrut-web" -c ~/devilbox/data/www/scanstrut-web
+tmux new-window -t "$SESSION" -n "scanstrut-web" -c $REPO_DIR/scanstrut-web
 tmux send-keys -t "$SESSION":"scanstrut-web" "nvim ." C-m
 
-tmux new-window -t "$SESSION" -n "hmielements-web-old" -c ~/devilbox/data/www/hmielements-web-old
+tmux new-window -t "$SESSION" -n "hmielements-web-old" -c $REPO_DIR/hmielements-web-old
 tmux send-keys -t "$SESSION":"hmielements-web-old" "nvim ." C-m

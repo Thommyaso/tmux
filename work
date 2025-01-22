@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECTS_DIR="${HOME}/devilbox/data/www"
+source ./variables.sh
 
 if [ -z "$1" ]; then
     echo "Usage: $0 <project-name>"
@@ -9,14 +9,12 @@ fi
 
 PROJECT_NAME="$1"
 CUSTOM_CONFIG="$2"
-FULL_PATH="$PROJECTS_DIR/$PROJECT_NAME"
-SCRIPT_PATH=$(readlink -f "${BASH_SOURCE[0]}")
-SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+FULL_PATH="$REPO_DIR/$PROJECT_NAME"
 
 if [ -d "$FULL_PATH" ]; then
     $SCRIPT_DIR/open-project.sh $PROJECT_NAME $CUSTOM_CONFIG
 else
-    echo "Project folder '$PROJECT_NAME' does not exist in $PROJECTS_DIR."
+    echo "Project folder '$PROJECT_NAME' does not exist in $REPO_DIR."
     exit 1
 fi
 
