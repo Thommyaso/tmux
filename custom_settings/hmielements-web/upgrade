@@ -8,5 +8,8 @@ tmux send-keys -t "$SESSION":"jacket-cms" "nvim ." C-m
 tmux new-window -t "$SESSION" -n "jacket" -c ~/devilbox/data/www/jacket
 tmux send-keys -t "$SESSION":"jacket" "nvim ." C-m
 
-tmux new-window -t "$SESSION" -n "scanstrut" -c ~/devilbox/data/www/scanstrut-web
-tmux send-keys -t "$SESSION":"scanstrut" "nvim ." C-m
+tmux new-window -t "$SESSION" -n "scanstrut-web" -c ~/devilbox/data/www/scanstrut-web
+tmux send-keys -t "$SESSION":"scanstrut-web" "nvim ." C-m
+
+tmux new-window -t "$SESSION" -n "hmielements-web-old" -c ~/devilbox/data/www/hmielements-web-old
+tmux send-keys -t "$SESSION":"hmielements-web-old" "nvim ." C-m
