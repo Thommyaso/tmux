@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source ./variables.sh
+VARABLES_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source $VARABLES_PATH/../../variables.sh
 
 SESSION=$1
 

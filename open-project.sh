@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source ./variables.sh
+VARABLES_PATH=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+
+source $VARABLES_PATH/variables.sh
 
 SESSION=$1
 PROJECT_DIRECTORY=$1

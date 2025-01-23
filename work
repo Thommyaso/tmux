@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source ./variables.sh
+VARABLES_PATH=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+
+source $VARABLES_PATH/variables.sh
 
 if [ -z "$1" ]; then
     echo "Usage: $0 <project-name>"
