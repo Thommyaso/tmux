@@ -6,11 +6,11 @@ source $VARABLES_PATH/../../variables.sh
 
 SESSION=$1
 
-tmux split-window -t "$SESSION":"terminal".0 -h -c $REPO_DIR/scanstrut-web
+tmux split-window -t "$SESSION":"terminal".0 -h -c $REPO_DIR/hmielements-web
 tmux send-keys -t "$SESSION":"terminal".1 "npm run dev" C-m
 
 tmux new-window -t "$SESSION" -n "jacket-cms" -c $REPO_DIR/jacket-cms
 tmux send-keys -t "$SESSION":"jacket-cms" "nvim ." C-m
 
-tmux new-window -t "$SESSION" -n "scanstrut" -c $REPO_DIR/scanstrut-web
-tmux send-keys -t "$SESSION":"scanstrut" "nvim ." C-m
+tmux new-window -t "$SESSION" -n "hmielements-web" -c $REPO_DIR/hmielements-web
+tmux send-keys -t "$SESSION":"hmielements-web" "nvim ." C-m

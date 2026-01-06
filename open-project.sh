@@ -34,6 +34,11 @@ if [ $? -ne 0 ]; then
     tmux new-window -t "$SESSION" -n "$PROJECT_DIRECTORY" -c $REPO_DIR/$PROJECT_DIRECTORY
     tmux send-keys -t "$SESSION":"$PROJECT_DIRECTORY".0 "nvim ." C-m 
 
+    # open claude on window 9
+    tmux new-window -t 9  -n "claude" -c $REPO_DIR/$PROJECT_DIRECTORY
+    tmux send-keys -t "$SESSION":9.0 "claude" C-m 
+    tmux select-window -t 1
+
     #Hooks:
     tmux set-hook -t "$SESSION" client-attached "run-shell $SCRIPT_DIR/start-process.sh $SESSION"
     tmux set-hook -t "$SESSION" client-detached "run-shell $SCRIPT_DIR/stop-process.sh $SESSION"

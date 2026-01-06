@@ -1,0 +1,16 @@
+#!/bin/bash
+
+VARABLES_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source $VARABLES_PATH/../../variables.sh
+
+SESSION=$1
+
+tmux new-window -t "$SESSION" -n "jacket-cms" -c $REPO_DIR/jacket-cms
+tmux send-keys -t "$SESSION":"jacket-cms" "nvim ." C-m
+
+tmux new-window -t "$SESSION" -n "jacket" -c $REPO_DIR/jacket
+tmux send-keys -t "$SESSION":"jacket" "nvim ." C-m
+
+tmux new-window -t "$SESSION" -n "scanstrut-web" -c $REPO_DIR/scanstrut-web
+tmux send-keys -t "$SESSION":"scanstrut-web" "nvim ." C-m
