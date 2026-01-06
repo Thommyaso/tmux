@@ -1,48 +1,57 @@
-# Tmux Configuration for Devilbox Projects
+# Tmux Configuration for Projects
+Quick setup for running projects with tmux. Opens a repository from your configured directory with Docker running in the background, a file watcher, and Neovim ready to go.
 
-## This tmux configuration allows you to seamlessly run any repository from chosen directory. By default it is setup for projects inside Devilbox, but it can be adjusted if needed. 
-## It integrates Docker session running in the background with a selected project environment, a file watcher, and an opened and focused Neovim editor.
+## How It Works
+- Window 0 is meant for all terminal processes, like file watcher etc. When you detach, everything stops (Ctrl+C sent to all panes).
+- When you reattach, commands restart automatically. If you had `npm run dev` running, it starts again.
+- Docker runs in a separate background session called devilbox.
+- Tab completion works for selecting projects from your repo directory.
+- Window 9 runs Claude Code.
 
-### Key Features:
-- Utilizes tmux window 0 for all terminal processes. When detached, all running processes in this window are automatically stopped by tmux (Ctrl+C is sent to every pane).
-- Upon reattaching to the session, each pane resumes its original command. For example, if npm run dev was running in a pane, it will automatically restart upon reattaching.
-- Devilbox runs in a separate background session named devilbox. (This can be configured to run any other Docker setup, or be compleatly disabled)
-- Includes auto-complete functionality for project selection, scanning repositories in ~/devilbox/data/www/. Only repositories from this directory are available for use.
+## Setup
+1. Link the script so you can run it from anywhere:
+   ```bash
+   sudo ln -s <your/path/to/work> /usr/local/bin/work
+   ```
 
-### Configuration Steps:
-1. Create a Symlink
-    - Link the work script to /usr/local/bin/ to make it globally accessible:
-        ``` sudo ln -s /path/to/work /usr/local/bin/work ```
+2. Add this line to your `.bashrc`:
+   ```bash
+   source </path/to/this/config-repository-dir>.bash_completion.sh
+   ```
 
-2. Update .bashrc
-    - Add the following line to your .bashrc file using Neovim or any other editor:
-        ``` source /path/to/the/repository/.bash_completion.sh ```
-    This enables auto-completion for the work command.
-
-3. Apply Changes
-    - Reload the .bashrc configuration:
-        ``` source ~/.bashrc ```
+3. Reload your shell:
+   ```bash
+   source ~/.bashrc
+   ```
 
 
-## Setting Up Custom Scripts for Projects
-    
-You can define custom scripts for specific projects to run alongside their configurations. This is particularly useful for additional commands or settings unique to a project.
+## Custom Project Scripts
+Add custom scripts for specific projects when you need extra setup or want to open multiple repos at once.
 
-### How to Configure:
-1. Place your custom scripts in:
-    ``` custom_settings/<project-directory-name>/<custom-script> ```
-    - Example:
-        If your project is named snake_game, and it requires additional configurations:
+Put your scripts here:
+```bash
+custom_settings/<project-name>/<script-name>
+```
 
-        Create a directory:
-            ``` custom_settings/snake_game/ ```
-        Add your script inside this directory.
+Example for a project called `snake_game`:
+```bash
+custom_settings/snake_game/my-script
+```
 
-2. Run the work command with the custom script:
-    ``` work snake_game <custom-script-name> ```
+Run it with custom script:
+```bash
+work snake_game my-script
+```
+Or without:
+```bash
+work snake_game
+```
 
-### The command automatically detects and runs the selected project with the specified custom script. Auto-complete is also supported for both project directories and custom scripts.
+Tab completion works for both project names and script names.
 
-### You may need to run command ```sudo chmod +x <script-name> ``` to make scripts executable.
+Make scripts executable if needed:
+```bash
+sudo chmod +x <script-name>
+```
 
 
