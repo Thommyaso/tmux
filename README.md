@@ -13,13 +13,20 @@ Quick setup for running projects with tmux. Opens a repository from your configu
    ```bash
    sudo ln -s <your/path/to/work> /usr/local/bin/work
    ```
-
 2. Add this line to your `.bashrc`:
    ```bash
    source </path/to/this/config-repository-dir>.bash_completion.sh
    ```
+3. Install tmux TPM (package manager for tmux)
+   ```bash
+   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+   ```
+4. Once TPM has been setup, install packages from the config. In active tmux session press:
+   ```bash
+   Prefix + I (ctrl + a  SHIFT + i)
 
-3. Reload your shell:
+   ```
+5. Reload your shell:
    ```bash
    source ~/.bashrc
    ```
