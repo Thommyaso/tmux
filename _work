@@ -1,0 +1,19 @@
+#compdef work
+
+emulate -L zsh
+
+local repo_dir=${functions_source[_work]:A:h}
+source "$repo_dir/variables.sh"
+
+if (( CURRENT == 2 )); then
+    local -a repos
+    repos=("$REPO_DIR"/*(/N:t))
+    compadd -- "${repos[@]}"
+    return
+fi
+
+if (( CURRENT == 3 )); then
+    local -a settings
+    settings=("$SCRIPT_DIR/custom_settings/${words[2]}"/*(N:t))
+    compadd -- "${settings[@]}"
+fi

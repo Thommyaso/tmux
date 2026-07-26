@@ -1,4 +1,4 @@
-REPO_DIR="/home/thomas/devilbox/data/www" # Path to directory that holds all repositories 
+REPO_DIR="/home/thomas/Repositories" # Path to directory that holds all repositories 
 DOCKER_DIR="/home/thomas/devilbox" # Docker configuration directory (devilbox in this example)
 START_DOCKER="./up.sh" # Script that starts docker -- LOCATION OF THIS SCRIPT HAS TO BE WITHIN DOCKER_DIR!!(adjust in open-project.sh if needed)
 
