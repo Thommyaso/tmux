@@ -10,6 +10,7 @@
 typeset -U path PATH
 path=(              # optional added paths to be added here in the future
     $path
+    "$HOME/.local/bin"
 )
 ###
 
